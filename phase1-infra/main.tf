@@ -1,5 +1,5 @@
 ## provider setup
-terraform {                                                                        
+terraform {
 	required_providers {
 		vsphere	= "~> 2.0"
 		avi	= {
@@ -44,7 +44,7 @@ data "avi_cloud" "default" {
 }
 
 ## create a vip IP pool in Default-Cloud to break a circular cloud_ref dependency
-## this is required to bootstrap a network object and IP pool to create the ipam profile                                
+## this is required to bootstrap a network object and IP pool to create the ipam profile
 ## Default-Cloud is not used for service engine or virtual service placement
 resource "avi_network" "ls-vip-pool" {
         name			= "ls-vip-pool"
@@ -147,6 +147,23 @@ resource "avi_serviceenginegroup" "mgmt-se-group" {
 	cloud_ref		= avi_cloud.cloud.id
 	tenant_ref		= data.avi_tenant.tenant.id
 	se_name_prefix		= "mgmt"
+	max_se			= 2
+	#buffer_se		= 0
+	se_deprovision_delay	= 1
+	vcenter_clusters {
+		cluster_refs	= [
+			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.mgmt.id}-${avi_cloud.cloud.uuid}"
+		]
+		include		= true
+	}
+}
+
+## create a new service engine group for GSLB
+resource "avi_serviceenginegroup" "gslb-se-group" {
+	name			= "gslb-se-group"
+	cloud_ref		= avi_cloud.cloud.id
+	tenant_ref		= data.avi_tenant.tenant.id
+	se_name_prefix		= "gslb"
 	max_se			= 2
 	#buffer_se		= 0
 	se_deprovision_delay	= 1
