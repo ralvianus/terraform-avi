@@ -1,5 +1,5 @@
 ## provider setup
-terraform {                                                                        
+terraform {
 	required_providers {
 		avi = {
 			source  = "vmware/avi"
@@ -63,6 +63,7 @@ resource "avi_vsvip" "dns" {
 }
 
 ## create the dns virtual service and attach vip
+## create static DNS entries for Openshift cluster
 resource "avi_virtualservice" "dns1" {
 	name			= "tf-vs-${var.vs_name}"
 	tenant_ref		= data.avi_tenant.admin.id
@@ -75,4 +76,30 @@ resource "avi_virtualservice" "dns1" {
 		port = 53
 	}
 	enabled			= true
+	static_dns_records {
+		fqdn = ["api.ocp-east.lb.lab01.one"]
+		type = "DNS_RECORD_A"
+		ttl = 1
+		ip_address {
+			ip_address {
+				addr = "172.16.10.251"
+				type = "V4"
+			}
+		}
+	}
+	static_dns_records {
+		fqdn = ["apps.ocp-east.lb.lab01.one"]
+		type = "DNS_RECORD_A"
+		ttl = 1
+		wildcard_match = true
+		ip_address {
+			ip_address {
+				addr = "172.16.10.252"
+				type = "V4"
+			}
+		}
+	}
+
+data "avi_virtualservice" "dns1" {
+	name			= "tf-vs-${var.vs_name}"
 }
