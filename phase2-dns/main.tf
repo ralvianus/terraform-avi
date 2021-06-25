@@ -99,7 +99,3 @@ resource "avi_virtualservice" "dns1" {
 			}
 		}
 	}
-
-data "avi_virtualservice" "dns1" {
-	name			= "tf-vs-${var.vs_name}"
-}
