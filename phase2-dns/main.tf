@@ -77,7 +77,7 @@ resource "avi_virtualservice" "dns1" {
 	}
 	enabled			= true
 	static_dns_records {
-		fqdn = ["api.ocp-east.lb.lab01.one"]
+		fqdn = ["api.ocp-east.lab01.one"]
 		type = "DNS_RECORD_A"
 		ttl = 1
 		ip_address {
@@ -88,7 +88,7 @@ resource "avi_virtualservice" "dns1" {
 		}
 	}
 	static_dns_records {
-		fqdn = ["apps.ocp-east.lb.lab01.one"]
+		fqdn = ["apps.ocp-east.lab01.one"]
 		type = "DNS_RECORD_A"
 		ttl = 1
 		wildcard_match = true
