@@ -99,3 +99,4 @@ resource "avi_virtualservice" "dns1" {
 			}
 		}
 	}
+}
