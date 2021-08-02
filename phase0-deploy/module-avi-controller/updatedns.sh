@@ -28,7 +28,8 @@ printf "%s\n" "avi-sessionid	[[ $SESSIONID ]]"
 ## update password
 if [[ -n "$CSRFTOKEN" && -n "$SESSIONID" ]]; then
 	read -r -d '' BODY <<-CONFIG
-  "dns_configuration": {
+  {
+    "dns_configuration": {
     "server_list": [
       {
         "addr": "$DNSSERVER",
@@ -36,6 +37,7 @@ if [[ -n "$CSRFTOKEN" && -n "$SESSIONID" ]]; then
       }
     ],
     "search_domain": "$DOMAIN"
+    }
   }
 	CONFIG
 	curl -ks -X PUT \
