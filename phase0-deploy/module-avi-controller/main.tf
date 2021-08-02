@@ -98,5 +98,29 @@ resource "null_resource" "updateuser" {
 	}
 	depends_on = [
 		null_resource.healthcheck
-	]		
+	]
+}
+
+resource "null_resource" "updatedns" {
+	triggers = {
+		avi-endpoint	= "avic.lab01.one"
+		avi-username	= "admin"
+		avi-pass	= var.admin-password
+		avi-dns-server = var.dns-server
+		avi-domain = var.domain
+	}
+	provisioner "local-exec" {
+		interpreter	= ["/bin/bash", "-c"]
+		command		= "${path.module}/updatedns.sh"
+		environment	= {
+			ENDPOINT	= self.triggers.avi-endpoint
+			AVIUSER		= self.triggers.avi-username
+			PASS		= self.triggers.avi-pass
+			DNSSERVER = self.trigger.avi-dns-server
+			DOMAIN = self.trigger.avi-domain
+		}
+	}
+	depends_on = [
+		null_resource.healthcheck
+	]
 }

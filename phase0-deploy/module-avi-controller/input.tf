@@ -15,3 +15,6 @@ variable "default-gw" {}
 ### initial config
 variable "admin-password" {}
 
+### dns config
+variable "dns-server" {}
+variable "domain" {}

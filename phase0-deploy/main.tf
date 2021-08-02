@@ -29,4 +29,8 @@ module "avi-controller" {
 
 	### initial config
 	admin-password	= "VMware1!SDDC"
+
+	### DNS config
+	dns-server = "172.16.10.1"
+	domain = "lab01.one"
 }
