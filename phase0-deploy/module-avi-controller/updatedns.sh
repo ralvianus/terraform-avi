@@ -4,7 +4,7 @@
 AVIUSER="admin"
 PASS="VMware1!SDDC"
 ENDPOINT="avic.lab01.one"
-DNSSERVER="172.16.10.2"
+DNSSERVER="172.16.10.1"
 DOMAIN="lab01.one"
 
 ## login
@@ -37,6 +37,16 @@ if [[ -n "$CSRFTOKEN" && -n "$SESSIONID" ]]; then
       }
     ],
     "search_domain": "$DOMAIN"
+    },
+    "ntp_configuration": {
+    "ntp_servers": [
+        {
+          "server": {
+            "addr": "172.16.10.1",
+            "type": "V4"
+          }
+        }
+      ]
     }
   }
 	CONFIG
