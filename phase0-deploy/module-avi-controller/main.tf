@@ -116,8 +116,8 @@ resource "null_resource" "updatedns" {
 			ENDPOINT	= self.triggers.avi-endpoint
 			AVIUSER		= self.triggers.avi-username
 			PASS		= self.triggers.avi-pass
-			DNSSERVER = self.trigger.avi-dns-server
-			DOMAIN = self.trigger.avi-domain
+			DNSSERVER = self.triggers.avi-dns-server
+			DOMAIN = self.triggers.avi-domain
 		}
 	}
 	depends_on = [
