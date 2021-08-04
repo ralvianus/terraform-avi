@@ -126,6 +126,39 @@ resource "avi_cloud" "cloud" {
 	}
 }
 
+## Network for pg-mgmt
+resource "avi_network" "pg-mgmt" {
+        name			= "pg-mgmt"
+	cloud_ref		= avi_cloud.cloud.id
+	dhcp_enabled		= true
+	ip6_autocfg_enabled	= false
+	configured_subnets {
+		prefix {
+			ip_addr {
+				addr = "172.16.10.0"
+				type = "V4"
+			}
+			mask = 24
+		}
+		static_ip_ranges {
+			type  = "STATIC_IPS_FOR_VIP"
+			range {
+				begin {
+					addr = "172.16.10.201"
+					type = "V4"
+				}
+				end {
+					addr = "172.16.10.225"
+					type = "V4"
+				}
+			}
+		}
+	}
+	depends_on = [
+		avi_cloud.cloud
+	]
+}
+
 ## update the service engine Default-Group to map to cmp cluster
 resource "avi_serviceenginegroup" "cmp-se-group" {
 	name			= "Default-Group"
