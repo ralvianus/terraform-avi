@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ## env variables
-AVIUSER="admin"
-PASS="VMware1!SDDC"
-ENDPOINT="avic.lab01.one"
-DNSSERVER="172.16.10.1"
-DOMAIN="lab01.one"
+#AVIUSER="admin"
+#PASS="VMware1!SDDC"
+#ENDPOINT="avic.lab01.one"
+#DNSSERVER="172.16.10.1"
+#DOMAIN="lab01.one"
 
 ## login
 LOGINHEADERS=$(curl -kvs -X POST \
