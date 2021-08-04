@@ -77,9 +77,9 @@ resource "avi_ipamdnsproviderprofile" "tf-dns-vmw" {
 	type	= "IPAMDNS_TYPE_INTERNAL_DNS"
 	internal_profile {
 		dns_service_domain {
-			domain_name  = "lb.lab01.one"
+			domain_name  = "apps.lab01.one"
 			pass_through = false
-			record_ttl   = 30
+			record_ttl   = 1
 		}
 	}
 }
