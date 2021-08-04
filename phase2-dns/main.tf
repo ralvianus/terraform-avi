@@ -10,7 +10,7 @@ module "avic-east" {
 	# dns service
 	cloud_name	= "tf-vmware-cloud"
 	vs_name		  = "avi-ns1"
-	vs_fqdn		  = "avi-ns1.lab01.one"
+	vs_fqdn		  = "avi-ns1.apps.lab01.one"
 	vs_address	= "172.16.10.120"
 
 	# Static DNS record
@@ -32,7 +32,7 @@ module "avic-west" {
 	# dns service
 	cloud_name	= "tf-vmware-cloud"
 	vs_name		  = "avi-ns1"
-	vs_fqdn		  = "avi-ns1.lab01.one"
+	vs_fqdn		  = "avi-ns1.apps.lab01.one"
 	vs_address	= "172.16.10.130"
 
 	# Static DNS record
