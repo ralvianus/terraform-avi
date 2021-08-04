@@ -5,7 +5,7 @@ vcenter_password	= "VMware1!SDDC"
 datacenter		= "lab01"
 
 # avi parameters
-avi_server		= "avic.lab01.one"
+avi_server		= "avic-east.lab01.one"
 avi_username		= "admin"
 avi_password		= "VMware1!SDDC"
 avi_version		= "20.1.6"
