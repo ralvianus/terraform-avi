@@ -11,7 +11,7 @@ provider "vsphere" {
 }
 
 module "avi-controller-a" {
-	source		= "./module-avi-controller"
+	source		= "./module-avi-controller-a"
 
 	### vsphere variables
 	datacenter	= "core"
@@ -37,7 +37,7 @@ module "avi-controller-a" {
 }
 
 module "avi-controller-b" {
-	source		= "./module-avi-controller"
+	source		= "./module-avi-controller-b"
 
 	vm_name		= "avic-east.lab01.one"
 	avi_endpoint = "avic-east.lab01.one"
