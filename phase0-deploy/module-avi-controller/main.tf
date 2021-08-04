@@ -121,6 +121,6 @@ resource "null_resource" "updatedns" {
 		}
 	}
 	depends_on = [
-		null_resource.healthcheck
+		null_resource.updateuser
 	]
 }
