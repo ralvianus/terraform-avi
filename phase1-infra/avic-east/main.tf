@@ -97,7 +97,7 @@ resource "avi_ipamdnsproviderprofile" "tf-dns-vmw" {
 			domain_name  = "apps.lab01.one"
 			pass_through = false
 			record_ttl   = 1
-		},
+		}
 		dns_service_domain {
 			domain_name  = "apps.ocp-east.lab01.one"
 			pass_through = false
