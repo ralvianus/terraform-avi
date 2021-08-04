@@ -11,7 +11,7 @@ provider "vsphere" {
 }
 
 module "avi-controller-a" {
-	source		= "./module-avi-controller-a"
+	source		= "./module-avi-controller"
 
 	### vsphere variables
 	datacenter	= "core"
@@ -37,14 +37,7 @@ module "avi-controller-a" {
 }
 
 module "avi-controller-b" {
-	source		= "./module-avi-controller-b"
-
-	vm_name		= "avic-east.lab01.one"
-	avi_endpoint = "avic-east.lab01.one"
-	remote_ovf_url	= "http://172.16.10.1:9000/iso/controller-20.1.6-9132.ova"
-	mgmt-ip		= "172.16.10.119"
-	mgmt-mask	= "255.255.255.0"
-	default-gw	= "172.16.10.1"
+	source		= "./module-avi-controller"
 
 	### appliance variables
 	vm_name		= "avic-west.lab01.one"
