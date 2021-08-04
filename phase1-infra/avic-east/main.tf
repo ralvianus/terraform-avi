@@ -159,6 +159,16 @@ resource "avi_network" "pg-mgmt" {
 	]
 }
 
+resource "avi_ipamdnsproviderprofile" "tf-ipam-vmw-update" {
+	name	= "tf-ipam-vmw"
+	type	= "IPAMDNS_TYPE_INTERNAL"
+	internal_profile {
+		usable_networks {
+			nw_ref = avi_network.pg-mgmt.id
+		}
+	}
+}
+
 ## update the service engine Default-Group to map to cmp cluster
 resource "avi_serviceenginegroup" "cmp-se-group" {
 	name			= "Default-Group"
