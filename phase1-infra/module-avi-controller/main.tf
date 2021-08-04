@@ -1,73 +1,10 @@
-## [`terraform-avi`](../README.md)`/phase1-infra`
-Terraform module for the `avi networks` load-balancing platform  
-Clone repository and adjust `terraform.tfvars` and `main.tf` as required  
-
----
-
-#### `run`
-```
-terraform init
-terraform plan
-terraform apply
-```
-
-#### `destroy` [optional]
-```
-terraform destroy
-```
-
----
-
-#### `terraform.tfvars`
-```
-# vsphere parameters
-datacenter	= "lab01"
-cluster		= "mgmt"
-
-# avi parameters
-avi_username	= "admin"
-avi_password	= "VMware1!SDDC"
-avi_controller	= "avic.lab01.one"
-avi_version	= "20.1.5"
-
-# vcenter cloud configuration
-cloud_name		= "tf-vmware-cloud"
-vcenter_license_tier	= "ENTERPRISE"
-vcenter_license_type	= "LIC_CORES"
-vcenter_configuration	= {
-	username		= "administrator@vsphere.local"
-	password		= "VMware1!SDDC"
-	vcenter_url		= "vcenter.lab01.one"
-	datacenter		= "lab01"
-	management_network	= "pg-mgmt"
-	privilege		= "WRITE_ACCESS"
-}
-```
-
-#### `main.tf`
-```
 ## provider setup
-terraform {                                                                        
-	required_providers {
-		vsphere	= "~> 1.26.0"
-		avi 	= {
-			source  = "vmware/avi"
-			version = ">= 20.1.5"
-		}
-	}
-}
-provider "vsphere" {
-	vsphere_server		= var.vcenter_server
-	user			= var.vcenter_username
-	password		= var.vcenter_password
-	allow_unverified_ssl	= true
-}
 provider "avi" {
 	avi_controller		= var.avi_server
 	avi_username		= var.avi_username
 	avi_password		= var.avi_password
+	avi_version		= var.avi_version
 	avi_tenant		= "admin"
-	avi_version		= "20.1.5"
 }
 
 ## vsphere objects
@@ -91,7 +28,7 @@ data "avi_cloud" "default" {
         name = "Default-Cloud"
 }
 
-## create a vip IP pool in Default-Cloud to break a cloud_ref circular dependency
+## create a vip IP pool in Default-Cloud to break a circular cloud_ref dependency
 ## this is required to bootstrap a network object and IP pool to create the ipam profile
 ## Default-Cloud is not used for service engine or virtual service placement
 resource "avi_network" "ls-vip-pool" {
@@ -205,4 +142,3 @@ resource "avi_serviceenginegroup" "mgmt-se-group" {
 		include		= true
 	}
 }
-```
