@@ -39,6 +39,13 @@ module "avi-controller-a" {
 module "avi-controller-b" {
 	source		= "./module-avi-controller"
 
+	### vsphere variables
+	datacenter	= "core"
+	cluster		= "core"
+	datastore	= "ds-esx11"
+	host		= "esx11.lab01.one"
+	network		= "vss-vmnet"
+
 	### appliance variables
 	vm_name		= "avic-west.lab01.one"
 	avi_endpoint = "avic-west.lab01.one"
