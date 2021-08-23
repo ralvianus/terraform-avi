@@ -33,7 +33,6 @@ data "avi_applicationprofile" "system-dns" {
 }
 data "avi_networkprofile" "system-udp-per-pkt" {
 	name	= "System-UDP-Per-Pkt"
-	session_idle_timeout = 10
 }
 data "avi_vrfcontext" "default" {
 	cloud_ref = data.avi_cloud.default.id
