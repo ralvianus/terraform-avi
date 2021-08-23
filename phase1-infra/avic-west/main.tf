@@ -180,8 +180,9 @@ resource "avi_serviceenginegroup" "cmp-se-group" {
 	tenant_ref		= data.avi_tenant.tenant.id
 	se_name_prefix		= "cmp"
 	max_se			= 4
-	#buffer_se		= 0
+	buffer_se		= 0
 	se_deprovision_delay	= 1
+	se_dp_max_hb_version = 2
 	vcenter_clusters {
 		cluster_refs	= [
 			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.cmp.id}-${avi_cloud.cloud.uuid}"
@@ -197,8 +198,9 @@ resource "avi_serviceenginegroup" "mgmt-se-group" {
 	tenant_ref		= data.avi_tenant.tenant.id
 	se_name_prefix		= "mgmt"
 	max_se			= 2
-	#buffer_se		= 0
+	buffer_se		= 0
 	se_deprovision_delay	= 1
+	se_dp_max_hb_version = 2
 	vcenter_clusters {
 		cluster_refs	= [
 			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.mgmt.id}-${avi_cloud.cloud.uuid}"
@@ -214,8 +216,9 @@ resource "avi_serviceenginegroup" "openshift-seg" {
 	tenant_ref		= data.avi_tenant.tenant.id
 	se_name_prefix		= "cmp"
 	max_se			= 4
-	#buffer_se		= 0
+	buffer_se		= 0
 	se_deprovision_delay	= 1
+	se_dp_max_hb_version = 2
 	vcenter_clusters {
 		cluster_refs	= [
 			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.cmp.id}-${avi_cloud.cloud.uuid}"
@@ -231,8 +234,9 @@ resource "avi_serviceenginegroup" "tkg-seg" {
 	tenant_ref		= data.avi_tenant.tenant.id
 	se_name_prefix		= "cmp"
 	max_se			= 4
-	#buffer_se		= 0
+	buffer_se		= 0
 	se_deprovision_delay	= 1
+	se_dp_max_hb_version = 2
 	vcenter_clusters {
 		cluster_refs	= [
 			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.cmp.id}-${avi_cloud.cloud.uuid}"
