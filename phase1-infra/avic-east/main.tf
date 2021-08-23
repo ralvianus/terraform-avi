@@ -213,7 +213,7 @@ resource "avi_serviceenginegroup" "openshift-seg" {
 	name			= "openshift-seg"
 	cloud_ref		= avi_cloud.cloud.id
 	tenant_ref		= data.avi_tenant.tenant.id
-	se_name_prefix		= "cmp"
+	se_name_prefix		= "ocp"
 	max_se			= 4
 	#buffer_se		= 0
 	se_deprovision_delay	= 1
@@ -230,7 +230,7 @@ resource "avi_serviceenginegroup" "tkg-seg" {
 	name			= "tkg-seg"
 	cloud_ref		= avi_cloud.cloud.id
 	tenant_ref		= data.avi_tenant.tenant.id
-	se_name_prefix		= "cmp"
+	se_name_prefix		= "tkg"
 	max_se			= 4
 	#buffer_se		= 0
 	se_deprovision_delay	= 1
