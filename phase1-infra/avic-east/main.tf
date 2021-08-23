@@ -5,7 +5,7 @@ terraform {
 		vsphere	= "~> 2.0"
 		avi	= {
 			source  = "vmware/avi"
-			version = "20.1.6"
+			version = var.avi_version
 		}
 	}
 }
