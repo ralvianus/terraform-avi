@@ -207,7 +207,15 @@ resource "avi_cloud" "nsxt_cloud" {
           manual {
             tier1_lrs {
               tier1_lr_id = var.nsxt_cloud_lr1
-              segment_id = var.nsxt_cloud_overlay_seg
+              segment_id = var.nsxt_cloud_overlay_seg1
+            }
+            tier1_lrs {
+              tier1_lr_id = var.nsxt_cloud_lr2
+              segment_id = var.nsxt_cloud_overlay_seg2
+            }
+            tier1_lrs {
+              tier1_lr_id = var.nsxt_cloud_lr3
+              segment_id = var.nsxt_cloud_overlay_seg3
             }
           }
         }

@@ -81,6 +81,18 @@ variable "nsxt_mgmt_segment_id" {
 variable "nsxt_cloud_lr1" {
   type    = string
 }
-variable "nsxt_cloud_overlay_seg" {
+variable "nsxt_cloud_overlay_seg1" {
+  type    = string
+}
+variable "nsxt_cloud_lr2" {
+  type    = string
+}
+variable "nsxt_cloud_overlay_seg2" {
+  type    = string
+}
+variable "nsxt_cloud_lr3" {
+  type    = string
+}
+variable "nsxt_cloud_overlay_seg3" {
   type    = string
 }
