@@ -182,29 +182,23 @@ resource "avi_cloud" "nsxt_cloud" {
   dns_provider_ref = avi_ipamdnsproviderprofile.tf-dns-vmw.id
   ipam_provider_ref = avi_ipamdnsproviderprofile.tf-ipam-vmw.id
   nsxt_configuration {
-      nsxt_credentials_ref = avi_cloudconnectoruser.nsxt_cred.uuid
+      # nsxt_credentials_ref = avi_cloudconnectoruser.nsxt_cred.uuid
+      transport_zone = data.nsxt_transport_zone.nsxt_mgmt_tz_name.id
       nsxt_url = var.nsxt_cloud_url
-      management_network_config {
-        tz_type = var.nsxt_cloud_mgmt_tz_type
-        transport_zone = "/infra/sites/default/enforcement-points/default/transport-zones/${data.nsxt_transport_zone.nsxt_mgmt_tz_name.id}"
-        management_segment {
+      management_segment {
           tier1_lr_id = var.mgmt_lr_id
           segment_id  = var.mgmt_segment_id
         }
       }
-      data_network_config {
-        tz_type = var.nsxt_cloud_data_tz_type
-        transport_zone = "/infra/sites/default/enforcement-points/default/transport-zones/${data.nsxt_transport_zone.nsxt_data_tz_name.id}"
-        tier1_segment_config {
-            segment_config_mode = "TIER1_SEGMENT_MANUAL"
-            manual {
-              tier1_lrs {
-                tier1_lr_id = "/infra/tier-1s/${var.nsxt_cloud_lr1}"
-                segment_id = "/infra/segments/${var.nsxt_cloud_overlay_seg}"
-              }
+      tier1_segment_config {
+          segment_config_mode = "TIER1_SEGMENT_MANUAL"
+          manual {
+            tier1_lrs {
+              tier1_lr_id = "/infra/tier-1s/${var.nsxt_cloud_lr1}"
+              segment_id = "/infra/segments/${var.nsxt_cloud_overlay_seg}"
             }
-        }
-      }
+          }
+      }  
   }
 }
 
