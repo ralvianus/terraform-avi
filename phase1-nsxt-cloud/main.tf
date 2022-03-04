@@ -26,7 +26,7 @@ terraform {
 provider "avi" {
   avi_username   = var.avi_username
   avi_password   = var.avi_password
-  avi_server = var.avi_server
+  avi_controller = var.avi_server
   avi_tenant     = var.tenant
   avi_version    = var.avi_version
 }
