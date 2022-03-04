@@ -182,13 +182,16 @@ resource "avi_cloud" "nsxt_cloud" {
   dns_provider_ref = avi_ipamdnsproviderprofile.tf-dns-vmw.id
   ipam_provider_ref = avi_ipamdnsproviderprofile.tf-ipam-vmw.id
   nsxt_configuration {
-      # nsxt_credentials_ref = avi_cloudconnectoruser.nsxt_cred.uuid
-      transport_zone = data.nsxt_transport_zone.nsxt_mgmt_tz_name.id
+      nsxt_credentials_ref = avi_cloudconnectoruser.nsxt_cred.uuid
+      # transport_zone = data.nsxt_transport_zone.nsxt_mgmt_tz_name.id
       nsxt_url = var.nsxt_cloud_url
-      management_segment {
-          tier1_lr_id = var.mgmt_lr_id
-          segment_id  = var.mgmt_segment_id
-        }
+      management_network_config {
+        tz_type = var.nsxt_cloud_mgmt_tz_type
+        transport_zone = data.nsxt_transport_zone.nsxt_mgmt_tz_name.id
+        management_segment {
+            tier1_lr_id = var.mgmt_lr_id
+            segment_id  = var.mgmt_segment_id
+          }
       }
       tier1_segment_config {
           segment_config_mode = "TIER1_SEGMENT_MANUAL"
