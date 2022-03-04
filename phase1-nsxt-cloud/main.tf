@@ -188,7 +188,7 @@ resource "avi_cloud" "nsxt_cloud" {
       management_network_config {
         tz_type = var.nsxt_cloud_mgmt_tz_type
         transport_zone = data.nsxt_transport_zone.nsxt_mgmt_tz_name.id
-        mgmt_segment_id = var.mgmt_segment_id
+        vlan_segment = var.nsxt_mgmt_segment_id
       }
       data_network_config {
         tz_type = var.nsxt_cloud_mgmt_tz_type
