@@ -246,7 +246,7 @@ resource "avi_serviceenginegroup" "cmp-se-group" {
 	#buffer_se		= 0
 	se_deprovision_delay	= 1
 	vcenters {
-		vcenter_ref = var.nsxt_cloud_vcenter_name
+		vcenter_ref = avi_vcenterserver.vcenter_server.id
     nsxt_clusters {
       cluster_ids = [data.vsphere_compute_cluster.cmp.id]
       include = true
