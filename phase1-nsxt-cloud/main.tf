@@ -63,11 +63,11 @@ data "vsphere_datastore" "datastore" {
 }
 data "vsphere_compute_cluster" "cmp" {
 	name          = "cmp"
-	datacenter_id = data.vsphere_datacenter.datacenter.id
+	datacenter_id = data.vsphere_datacenter.dc.id
 }
 data "vsphere_compute_cluster" "mgmt" {
 	name          = "mgmt"
-	datacenter_id = data.vsphere_datacenter.datacenter.id
+	datacenter_id = data.vsphere_datacenter.dc.id
 }
 
 ## NSX-T objects
