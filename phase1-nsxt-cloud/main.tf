@@ -170,6 +170,7 @@ resource "avi_ipamdnsproviderprofile" "tf-dns-vmw" {
 
 # Create NSX-T Cloud
 resource "avi_cloud" "nsxt_cloud" {
+  depends_on     = [avi_cloudconnectoruser.nsxt_cred]
   name = var.cloud_name
   tenant_ref = var.tenant
   vtype = "CLOUD_NSXT"
