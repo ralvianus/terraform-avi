@@ -83,7 +83,7 @@ resource "avi_virtualservice" "dns1" {
 		ttl = 1
 		ip_address {
 			ip_address {
-				addr = "172.16.10.251"
+				addr = "10.10.10.251"
 				type = "V4"
 			}
 		}
@@ -95,7 +95,7 @@ resource "avi_virtualservice" "dns1" {
 		wildcard_match = true
 		ip_address {
 			ip_address {
-				addr = "172.16.10.252"
+				addr = "10.10.10.252"
 				type = "V4"
 			}
 		}
