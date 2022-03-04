@@ -198,8 +198,7 @@ resource "avi_cloud" "nsxt_cloud" {
               segment_id = "/infra/segments/${var.nsxt_cloud_overlay_seg}"
             }
           }
-      }  
-  }
+      }
 }
 
 # Associate vCenter & Content Library to NSX-T Cloud
