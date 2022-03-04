@@ -1,6 +1,19 @@
-This repository includes example of terraform plan to integrate Avi Solution with NSX-T. This terraform plan will create NSX-T cloud using Avi terraform provider.
+## [`terraform-avi`](../README.md)`/phase1-nsxt-cloud`
+Terraform module for the `avi networks` load-balancing platform  
+Clone repository and adjust `terraform.tfvars` and `main.tf` as required  
 
-Prerequisits
- - vCenter version 6.7+ and ESX environment should be provisioned
- - NSX-T version 2.5+ should be provisioned and configured with T1, transport zone, logical segments
- - Avi Controller 20.1.1+ should be provisioned and ready after initial setup
+---
+
+#### `run`
+```
+terraform init
+terraform plan
+terraform apply
+```
+
+#### `destroy` [optional]
+```
+terraform destroy
+```
+
+---
