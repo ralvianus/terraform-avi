@@ -202,6 +202,7 @@ resource "avi_cloud" "nsxt_cloud" {
             }
           }
       }
+    }
 }
 
 # Associate vCenter & Content Library to NSX-T Cloud
