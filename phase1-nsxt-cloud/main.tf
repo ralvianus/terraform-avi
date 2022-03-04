@@ -188,10 +188,8 @@ resource "avi_cloud" "nsxt_cloud" {
       management_network_config {
         tz_type = var.nsxt_cloud_mgmt_tz_type
         transport_zone = data.nsxt_transport_zone.nsxt_mgmt_tz_name.id
-        management_segment {
-            tier1_lr_id = var.mgmt_lr_id
-            segment_id  = var.mgmt_segment_id
-          }
+        tier1_lr_id = var.mgmt_lr_id
+        segment_id  = var.mgmt_segment_id
       }
       tier1_segment_config {
           segment_config_mode = "TIER1_SEGMENT_MANUAL"
