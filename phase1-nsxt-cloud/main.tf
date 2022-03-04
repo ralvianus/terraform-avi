@@ -154,7 +154,7 @@ resource "avi_ipamdnsproviderprofile" "tf-ipam-vmw" {
 	type	= "IPAMDNS_TYPE_INTERNAL"
 	internal_profile {
 		usable_networks {
-			nw_ref = data.avi_network.avi_vip.id
+			nw_ref = avi_network.ls-vip-pool.id
 		}
 	}
 }
