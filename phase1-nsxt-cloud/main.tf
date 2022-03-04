@@ -217,3 +217,38 @@ resource "avi_vcenterserver" "vcenter_server" {
     }
     vcenter_credentials_ref = avi_cloudconnectoruser.vcsa_cred.uuid
 }
+
+## update the service engine Default-Group to map to cmp cluster
+resource "avi_serviceenginegroup" "cmp-se-group" {
+  depends_on     = [avi_cloud.nsxt_cloud]
+	name			= "Default-Group"
+	cloud_ref		= avi_cloud.nsxt_cloud.id
+	tenant_ref		= var.tenant
+	se_name_prefix		= "cmp"
+	max_se			= 4
+	#buffer_se		= 0
+	se_deprovision_delay	= 1
+	vcenter_clusters {
+		cluster_refs	= [
+			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.cmp.id}-${avi_cloud.cloud.uuid}"
+		]
+		include		= true
+	}
+}
+
+## create a new service engine group and map to mgmt cluster
+resource "avi_serviceenginegroup" "mgmt-se-group" {
+	name			= "mgmt-se-group"
+	cloud_ref		= avi_cloud.nsxt_cloud.id
+	tenant_ref		= var.tenant
+	se_name_prefix		= "mgmt"
+	max_se			= 2
+	#buffer_se		= 0
+	se_deprovision_delay	= 1
+	vcenter_clusters {
+		cluster_refs	= [
+			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.mgmt.id}-${avi_cloud.cloud.uuid}"
+		]
+		include		= true
+	}
+}
