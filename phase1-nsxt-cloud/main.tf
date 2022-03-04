@@ -74,12 +74,6 @@ data "nsxt_transport_zone" "nsxt_data_tz_name" {
   display_name = var.nsxt_cloud_data_tz_name
 }
 
-data "avi_network" "avi_vip" {
-  cloud_ref = avi_cloud.nsxt_cloud.id
-  name = var.data_avi_network_avi_vip_name
-  depends_on = [time_sleep.wait_20_seconds]
-}
-
 data "avi_cloud" "default" {
         name = "Default-Cloud"
 }
