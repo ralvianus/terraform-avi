@@ -248,9 +248,7 @@ resource "avi_serviceenginegroup" "cmp-se-group" {
 	vcenters {
 		vcenter_ref = var.nsxt_cloud_vcenter_name
     nsxt_clusters {
-      cluster_ids {
-        id = data.vsphere_compute_cluster.cmp.id
-      }
+      include = data.vsphere_compute_cluster.cmp.id
     }
 	}
 }
@@ -267,9 +265,7 @@ resource "avi_serviceenginegroup" "mgmt-se-group" {
   vcenters {
 		vcenter_ref = var.nsxt_cloud_vcenter_name
     nsxt_clusters {
-      cluster_ids {
-        id = data.vsphere_compute_cluster.mgmt.id
-      }
+      include = data.vsphere_compute_cluster.mgmt.id
     }
 	}
 }
