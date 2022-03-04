@@ -239,7 +239,7 @@ resource "avi_serviceenginegroup" "cmp-se-group" {
 	se_deprovision_delay	= 1
 	vcenter_clusters {
 		cluster_refs	= [
-			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.cmp.id}-${avi_cloud.cloud.uuid}"
+			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.cmp.id}-${avi_cloud.nsxt_cloud.uuid}"
 		]
 		include		= true
 	}
@@ -256,7 +256,7 @@ resource "avi_serviceenginegroup" "mgmt-se-group" {
 	se_deprovision_delay	= 1
 	vcenter_clusters {
 		cluster_refs	= [
-			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.mgmt.id}-${avi_cloud.cloud.uuid}"
+			"https://avic.lab01.one/api/vimgrclusterruntime/${data.vsphere_compute_cluster.mgmt.id}-${avi_cloud.nsxt_cloud.uuid}"
 		]
 		include		= true
 	}
