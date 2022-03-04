@@ -53,23 +53,32 @@ provider "time" {
 # Define the data sources
 #
 
+## vsphere objects
 data "vsphere_datacenter" "dc" {
   name = var.datacenter
 }
-
 data "vsphere_datastore" "datastore" {
   name          = var.datastore
   datacenter_id = data.vsphere_datacenter.dc.id
 }
+data "vsphere_compute_cluster" "cmp" {
+	name          = "cmp"
+	datacenter_id = data.vsphere_datacenter.datacenter.id
+}
+data "vsphere_compute_cluster" "mgmt" {
+	name          = "mgmt"
+	datacenter_id = data.vsphere_datacenter.datacenter.id
+}
 
+## NSX-T objects
 data "nsxt_transport_zone" "nsxt_mgmt_tz_name" {
   display_name = var.nsxt_cloud_mgmt_tz_name
 }
-
 data "nsxt_transport_zone" "nsxt_data_tz_name" {
   display_name = var.nsxt_cloud_data_tz_name
 }
 
+## AVI objects
 data "avi_cloud" "default" {
         name = "Default-Cloud"
 }
