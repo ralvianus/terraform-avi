@@ -62,10 +62,6 @@ data "vsphere_datastore" "datastore" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-data "vsphere_content_library" "content_library" {
-  name = var.content_library_name
-}
-
 data "nsxt_transport_zone" "nsxt_mgmt_tz_name" {
   display_name = var.nsxt_cloud_mgmt_tz_name
 }
