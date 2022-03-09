@@ -7,9 +7,10 @@ terraform {
   }
 }
 module "avi_controller_aws" {
-  source = "../.."
+  source  = "slarimore02/avi-controller-aws/aws"
+  version = "1.0.9"
 
-  region                    = "us-west-2"
+  region                    = "us-west-1"
   aws_access_key            = var.aws_access_key
   aws_secret_key            = var.aws_secret_key
   create_networking         = var.create_networking
