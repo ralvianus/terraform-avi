@@ -29,5 +29,5 @@ module "avi_controller_aws" {
   dns_service_domain        = var.dns_service_domain
   configure_dns_vs          = var.configure_dns_vs
   dns_vs_settings           = var.dns_vs_settings
-  custom_tags               = { "Role" : "Avi-Controller", "Owner" : "ralvianus", "Department" : "VCN", "shutdown_policy" : "noshut" }
+  custom_tags               = var.custom_tags
 }
