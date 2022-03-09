@@ -18,29 +18,26 @@ terraform destroy
 
 #### `terraform.tfvars`
 ```
-# vsphere  parameters
-vcenter_server		= "vcenter.lab01.one"
-vcenter_username	= ""
-vcenter_password	= ""
-datacenter		= "lab01"
+# AWS key
+aws_access_key = ""
+aws_secret_key = ""
 
-# avi parameters
-avi_server		= "avic.lab01.one"
-avi_username		= ""
-avi_password		= ""
-avi_version		= "20.1.6"
+# AWS Networking
+create_networking = "true"
+avi_cidr_block = "10.154.0.0/16"
+create_iam = "true"
+custom_vpc_id = ""
+custom_subnet_ids = [""]
+key_pair_name = ""
+private_key_path = ""
 
-# vcenter cloud configuration
-cloud_name		= "tf-vmware-cloud"
-vcenter_license_tier	= "ENTERPRISE"
-vcenter_license_type	= "LIC_CORES"
-vcenter_configuration	= {
-	username		= ""
-	password		= ""
-	vcenter_url		= "vcenter.lab01.one"
-	datacenter		= "lab01"
-	management_network	= "pg-mgmt"
-	privilege		= "WRITE_ACCESS"
-}
+# AVI Parameters
+avi_version = "21.1.3"
+controller_password = ""
+name_prefix = ""
+controller_ha = "false"
+controller_public_address = "true"
+configure_dns_profile = "true"
+configure_dns_vs = "true"
 ```
 ---
