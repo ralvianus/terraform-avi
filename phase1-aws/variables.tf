@@ -23,10 +23,6 @@ variable "controller_password" {
     error_message = "The controller_password value must be more than 8 characters and contain at least one each of uppercase, lowercase, numbers, and special characters."
   }
 }
-variable "custom_tags" {
-  description = "This are the tags for various resources provisioned"
-  type        = string
-}
 variable "name_prefix" {
   description = "This prefix is appended to the names of the Controller and SEs"
   type        = string
