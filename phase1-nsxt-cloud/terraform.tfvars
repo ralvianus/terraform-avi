@@ -35,7 +35,7 @@ nsxt_cloud_data_tz_name = "nsx-overlay-transportzone"
 nsxt_cloud_data_tz_type = "OVERLAY"
 nsxt_cloud_lr1 = "t1-avi"
 nsxt_cloud_overlay_seg1 = "avi-mgmt-00"
-nsxt_cloud_lr2 = "t1-east"
+nsxt_cloud_lr2 = "T1-Router-TAS-Deployment"
 nsxt_cloud_overlay_seg2 = "ls-tas-deployment-01"
 
 # Other Paramters
