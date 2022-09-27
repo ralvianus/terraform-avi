@@ -62,11 +62,7 @@ data "vsphere_datastore" "datastore" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 data "vsphere_compute_cluster" "cmp" {
-	name          = "cmp"
-	datacenter_id = data.vsphere_datacenter.dc.id
-}
-data "vsphere_compute_cluster" "mgmt" {
-	name          = "mgmt"
+	name          = "RegionA01-Compute"
 	datacenter_id = data.vsphere_datacenter.dc.id
 }
 
@@ -170,7 +166,7 @@ resource "avi_ipamdnsproviderprofile" "tf-dns-vmw" {
 	type	= "IPAMDNS_TYPE_INTERNAL_DNS"
 	internal_profile {
 		dns_service_domain {
-			domain_name  = "lb.lab01.one"
+			domain_name  = "tas-app.corp.vmw"
 			pass_through = false
 			record_ttl   = 30
 		}
@@ -213,10 +209,6 @@ resource "avi_cloud" "nsxt_cloud" {
               tier1_lr_id = var.nsxt_cloud_lr2
               segment_id = var.nsxt_cloud_overlay_seg2
             }
-            tier1_lrs {
-              tier1_lr_id = var.nsxt_cloud_lr3
-              segment_id = var.nsxt_cloud_overlay_seg3
-            }
           }
         }
       }
@@ -249,24 +241,6 @@ resource "avi_serviceenginegroup" "cmp-se-group" {
 		vcenter_ref = avi_vcenterserver.vcenter_server.id
     nsxt_clusters {
       cluster_ids = [data.vsphere_compute_cluster.cmp.id]
-      include = true
-    }
-	}
-}
-
-## create a new service engine group and map to mgmt cluster
-resource "avi_serviceenginegroup" "mgmt-se-group" {
-	name			= "mgmt-se-group"
-	cloud_ref		= avi_cloud.nsxt_cloud.id
-	tenant_ref		= var.tenant
-	se_name_prefix		= "mgmt"
-	max_se			= 2
-	#buffer_se		= 0
-	se_deprovision_delay	= 1
-  vcenters {
-		vcenter_ref = avi_vcenterserver.vcenter_server.id
-    nsxt_clusters {
-      cluster_ids = [data.vsphere_compute_cluster.mgmt.id]
       include = true
     }
 	}

@@ -90,9 +90,3 @@ variable "nsxt_cloud_lr2" {
 variable "nsxt_cloud_overlay_seg2" {
   type    = string
 }
-variable "nsxt_cloud_lr3" {
-  type    = string
-}
-variable "nsxt_cloud_overlay_seg3" {
-  type    = string
-}
