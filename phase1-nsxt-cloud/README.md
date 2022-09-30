@@ -20,8 +20,8 @@ terraform destroy
 ```
 # vsphere  parameters
 vcenter_server		= "vcsa-01a.corp.vmw"
-vcenter_username	= "administrator@vsphere.local"
-vcenter_password	= "VMware1!"
+vcenter_username	= ""
+vcenter_password	= ""
 datacenter		= "RegionA01"
 datastore	= "vol1"
 content_library_name = "avi-cl"
@@ -30,15 +30,15 @@ vcsa_cred_name = "vcsa-cred"
 
 # avi parameters
 avi_server		= "avic.corp.vmw"
-avi_username		= "admin"
-avi_password		= "VMware1!"
+avi_username		= ""
+avi_password		= ""
 avi_version		= "21.1.4"
 tenant = "admin"
 
 # NSX-T cloud configuration
 nsxt_cloud_url = "nsxmanager.corp.vmw"
-nsxt_cloud_username = "admin"
-nsxt_cloud_password = "VMware1!VMware1!"
+nsxt_cloud_username = ""
+nsxt_cloud_password = ""
 nsxt_cloud_prefix = "tf"
 cloud_name = "tf-nsxt-cloud"
 nsxt_cloud_cred_name = "nsxt-cloud_cred"

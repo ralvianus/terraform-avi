@@ -1,5 +1,8 @@
 ## [`terraform-avi`](../README.md)`/phase2-pcf`
 Terraform module for the `avi networks` load-balancing platform to support CloudFoundry environment. The documentation on the design is [here](https://avinetworks.com/docs/22.1/cloud-foundry-load-balancing/)
+
+This lab uses Tanzu Application Service on NSX-T networking. NSX-T Cloud has to be configured in AVI controller prior to this configuration.
+
 Clone repository and adjust `terraform.tfvars` and `main.tf` as required  
 
 ---
@@ -19,17 +22,20 @@ terraform destroy
 #### `terraform.tfvars`
 ```
 # avi parameters
-avi_server	= "avic.lab01.one"
+avi_server	= "avic.corp.vmw"
 avi_username	= ""
 avi_password	= ""
-avi_version	= "21.1.3"
-nsxt_cloud_lr1 = "t1-avi"
+avi_version	= "21.1.4"
+nsxt_cloud_lr1 = "T1-Router-TAS-Deployment"
+cloud_name	= "tf-nsxt-cloud"
+
+# NSX-T cloud configuration
+nsxt_cloud_url = "nsxmanager.corp.vmw"
+nsxt_cloud_username = ""
+nsxt_cloud_password = ""
 
 # pcf Virtual Service
-hmon_name = 
-cloud_name	= "tf-nsxt-cloud"
-vs_name		= "ns1"
-vs_fqdn		= "avi-ns1.lb.lab01.one"
-vs_address	= "10.20.10.120"
+vs_name		= "pcf"
+vs_address	= "10.20.10.110"
 ```
 ---
