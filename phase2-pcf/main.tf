@@ -58,10 +58,10 @@ resource "nsxt_policy_group" "pcf-control-group" {
 }
 
 ## Creating CA Certificate
-resource "avi_sslkeyandcertificate" "vmca" {
-    name = "terraform-example-foo"
-    tenant_ref = "/api/tenant/?name=admin"
-}
+#resource "avi_sslkeyandcertificate" "vmca" {
+#    name = "terraform-example-foo"
+#    tenant_ref = "/api/tenant/?name=admin"
+#}
 
 ## create the health monitor
 resource "avi_healthmonitor" "pcf-hmon-http" {
