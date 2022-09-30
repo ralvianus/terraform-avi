@@ -124,7 +124,7 @@ resource "avi_applicationprofile" "pcf-http-profile" {
 }
 
 ## create http pool
-resource "Pool" "pcf-http-pool" {
+resource "avi_pool" "pcf-http-pool" {
     name = "tf-pcf-gorouter-http-pool"
     tenant_ref = data.avi_tenant.admin.id
 		tier1_lr = var.nsxt_cloud_lr1
@@ -136,7 +136,7 @@ resource "Pool" "pcf-http-pool" {
 }
 
 ## create tcp pool
-resource "Pool" "pcf-tcp-pool" {
+resource "avi_pool" "pcf-tcp-pool" {
     name = "tf-pcf-gorouter-tcp-pool"
     tenant_ref = data.avi_tenant.admin.id
 		tier1_lr = var.nsxt_cloud_lr1
@@ -149,7 +149,7 @@ resource "Pool" "pcf-tcp-pool" {
 }
 
 ## create ssh pool
-resource "Pool" "pcf-ssh-pool" {
+resource "avi_pool" "pcf-ssh-pool" {
     name = "tf-pcf-gorouter-ssh-pool"
     tenant_ref = data.avi_tenant.admin.id
 		tier1_lr = var.nsxt_cloud_lr1
