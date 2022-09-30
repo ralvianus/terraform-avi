@@ -127,6 +127,7 @@ resource "avi_applicationprofile" "pcf-http-profile" {
 resource "avi_pool" "pcf-http-pool" {
     name = "tf-pcf-gorouter-http-pool"
     tenant_ref = data.avi_tenant.admin.id
+		cloud_ref		= data.avi_cloud.vmware.id
 		tier1_lr = var.nsxt_cloud_lr1
 		default_server_port = "8080"
 		enabled = true
@@ -139,6 +140,7 @@ resource "avi_pool" "pcf-http-pool" {
 resource "avi_pool" "pcf-tcp-pool" {
     name = "tf-pcf-gorouter-tcp-pool"
     tenant_ref = data.avi_tenant.admin.id
+		cloud_ref		= data.avi_cloud.vmware.id
 		tier1_lr = var.nsxt_cloud_lr1
 		default_server_port = "80"
 		enabled = true
@@ -152,6 +154,7 @@ resource "avi_pool" "pcf-tcp-pool" {
 resource "avi_pool" "pcf-ssh-pool" {
     name = "tf-pcf-gorouter-ssh-pool"
     tenant_ref = data.avi_tenant.admin.id
+		cloud_ref		= data.avi_cloud.vmware.id
 		tier1_lr = var.nsxt_cloud_lr1
 		default_server_port = "2222"
 		enabled = true
