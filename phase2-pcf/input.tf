@@ -17,14 +17,7 @@ variable "nsxt_cloud_password" {
   type    = string
 }
 
-# pcf certificate
-variable "ca_certs"	{}
-variable "ca_key"	{}
-variable "pcf_certs"	{}
-variable "pcf_key"	{}
-
 # pcf Virtual Service
 variable "vs_name"	{}
-variable "vs_http_name"	{}
 variable "vs_https_name"	{}
 variable "vs_address"	{}

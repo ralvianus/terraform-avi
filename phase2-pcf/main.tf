@@ -192,51 +192,7 @@ resource "avi_vsvip" "pcf-vip" {
 	}
 }
 
-#resource "avi_sslkeyandcertificate" "pcf-ca-certificate" {
-#    name = "tf-pcf-vmca-certificate"
-#    tenant_ref = data.avi_tenant.admin.id
-#		type = "SSL_CERTIFICATE_TYPE_CA"
-#		certificate {
-#				certificate = "${var.ca_certs}"
-#		}
-#		certificate_base64 = true
-#		key = "${var.ca_key}"
-#		key_base64 = true
-#}
-
-#resource "avi_sslkeyandcertificate" "pcf-certificate" {
-#    name = "tf-pcf-certificate"
-#    tenant_ref = data.avi_tenant.admin.id
-#		type = "SSL_CERTIFICATE_TYPE_VIRTUALSERVICE"
-#		certificate {
-#				certificate = "${var.pcf_certs}"
-#		}
-#		certificate_base64 = true
-#		key = "${var.pcf_key}"
-#		key_base64 = true
-#		ca_certs {
-#      ca_ref = avi_sslkeyandcertificate.pcf-ca-certificate.id
-#    }
-#}
-
-## create the dns virtual service and attach vip
-
-#resource "avi_virtualservice" "pcf-vs-http" {
-#	name			= "tf-vs-${var.vs_http_name}"
-#	tenant_ref		= data.avi_tenant.admin.id
-#	cloud_ref		= data.avi_cloud.vmware.id
-#	vsvip_ref		= avi_vsvip.pcf-vip.id
-#	application_profile_ref	= avi_applicationprofile.pcf-http-profile.id
-#	se_group_ref		= data.avi_serviceenginegroup.default.id
-#	pool_ref = avi_pool.pcf-http-pool.id
-#	analytics_policy {
-#		all_headers = true
-#	}
-#	services {
-#		port = 80
-#	}
-#	enabled			= true
-#}
+# create the Virtual Service
 
 resource "avi_virtualservice" "pcf-vs-https" {
 	name			= "tf-vs-${var.vs_https_name}"
