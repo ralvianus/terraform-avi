@@ -202,7 +202,7 @@ resource "avi_sslkeyandcertificate" "pcf-certificate" {
 		certificate_base64 = true
 		key = "${var.pcf_key}"
 		key_base64 = true
-		ca_certs = {
+		ca_certs {
       "ca_ref": avi_sslkeyandcertificate.pcf-ca-certificate.id
     }
 }
