@@ -62,12 +62,6 @@ resource "nsxt_policy_group" "pcf-control-group" {
   description  = "Terraform provisioned pcf-control Group"
 }
 
-## Creating CA Certificate
-#resource "avi_sslkeyandcertificate" "vmca" {
-#    name = "terraform-example-foo"
-#    tenant_ref = "/api/tenant/?name=admin"
-#}
-
 ## create the health monitor
 resource "avi_healthmonitor" "pcf-hmon-http" {
     name = "tf-pcf-gorouter-http-hmon"
@@ -191,10 +185,10 @@ resource "avi_sslkeyandcertificate" "pcf-ca-certificate" {
     tenant_ref = data.avi_tenant.admin.id
 		type = "SSL_CERTIFICATE_TYPE_CA"
 		certificate = {
-				certificate = "var.ca_certs"
-			}
+				certificate = "${var.ca_certs}"
+		}
 		certificate_base64 = true
-		key = "var.ca_key"
+		key = "${var.ca_key}"
 		key_base64 = true
 }
 
@@ -203,10 +197,10 @@ resource "avi_sslkeyandcertificate" "pcf-certificate" {
     tenant_ref = data.avi_tenant.admin.id
 		type = "SSL_CERTIFICATE_TYPE_VIRTUALSERVICE"
 		certificate = {
-				certificate = "var.pcf_certs"
-			}
+				certificate = "${var.pcf_certs}"
+		}
 		certificate_base64 = true
-		key = "var.pcf_key"
+		key = "${var.pcf_key}"
 		key_base64 = true
 		ca_certs = {
       "ca_ref": avi_sslkeyandcertificate.pcf-ca-certificate.id
@@ -240,7 +234,7 @@ resource "avi_virtualservice" "pcf-vs-https" {
 	ssl_key_and_certificate_refs = [
 
 	]
-	ssl_profile_ref = avi_sslprofile.default.id
+	ssl_profile_ref = data.avi_sslprofile.default.id
 	analytics_policy {
 		all_headers = true
 	}
