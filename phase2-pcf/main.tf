@@ -123,6 +123,14 @@ resource "avi_applicationprofile" "pcf-http-profile" {
 			xff_enabled = true
 			xff_alternate_name = "X-Forwarded-For"
 			x_forwarded_proto_enabled = true
+			reset_conn_http_on_ssl_port = true
+			http_to_https = true
+			secure_cookie_enabled = true
+			hsts_enabled = true
+			hsts_max_age = "365"
+			hsts_subdomains_enabled = true
+			httponly_enabled = true
+			server_side_redirect_to_https = true
 		}
 }
 
@@ -132,7 +140,7 @@ resource "avi_pool" "pcf-http-pool" {
     tenant_ref = data.avi_tenant.admin.id
 		cloud_ref		= data.avi_cloud.vmware.id
 		tier1_lr = var.nsxt_cloud_lr1
-		default_server_port = "8080"
+		default_server_port = "80"
 		enabled = true
 		lb_algorithm = "LB_ALGORITHM_LEAST_CONNECTIONS"
 		nsx_securitygroup = [nsxt_policy_group.gorouter-group.id]
