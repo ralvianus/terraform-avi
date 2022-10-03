@@ -190,7 +190,9 @@ resource "avi_sslkeyandcertificate" "pcf-ca-certificate" {
     name = "tf-pcf-vmca-certificate"
     tenant_ref = data.avi_tenant.admin.id
 		type = "SSL_CERTIFICATE_TYPE_CA"
-		certificate = "var.ca_certs"
+		certificate = {
+				certificate = "var.ca_certs"
+			}
 		certificate_base64 = true
 		key = "var.ca_key"
 		key_base64 = true
@@ -200,13 +202,14 @@ resource "avi_sslkeyandcertificate" "pcf-certificate" {
     name = "tf-pcf-certificate"
     tenant_ref = data.avi_tenant.admin.id
 		type = "SSL_CERTIFICATE_TYPE_VIRTUALSERVICE"
-		certificate = "var.pcf_certs"
+		certificate = {
+				certificate = "var.pcf_certs"
+			}
 		certificate_base64 = true
 		key = "var.pcf_key"
 		key_base64 = true
 		ca_certs = {
-      "ca_ref": "https://avic.corp.vmw/api/sslkeyandcertificate/sslkeyandcertificate-e05a3664-5a33-46ef-901e-278caeffddbd",
-      "name": "controlcenter.corp.vmw"
+      "ca_ref": avi_sslkeyandcertificate.pcf-ca-certificate.id
     }
 }
 

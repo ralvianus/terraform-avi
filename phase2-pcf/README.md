@@ -35,6 +35,7 @@ nsxt_cloud_username = ""
 nsxt_cloud_password = ""
 
 # pcf Virtual Service
+vs_name = "pcf"
 vs_http_name	= "pcf-http"
 vs_https_name = "pcf-https"
 vs_address	= "10.20.10.110"
