@@ -51,6 +51,10 @@ data "avi_sslprofile" "default" {
     tenant_ref = data.avi_tenant.admin.id
 }
 
+data "avi_sslkeyandcertificate" "default" {
+    name = "System-Default-Cert"
+}
+
 ## create NSX-T group for go-router
 resource "nsxt_policy_group" "gorouter-group" {
   display_name = "tf-group-pcf-gorouter"
@@ -208,20 +212,23 @@ resource "avi_sslkeyandcertificate" "pcf-certificate" {
 }
 
 ## create the dns virtual service and attach vip
-## create static DNS entries for Openshift cluster
-resource "avi_virtualservice" "pcf-vs-http" {
-	name			= "tf-vs-${var.vs_http_name}"
-	tenant_ref		= data.avi_tenant.admin.id
-	cloud_ref		= data.avi_cloud.vmware.id
-	vsvip_ref		= avi_vsvip.pcf-vip.id
-	application_profile_ref	= avi_applicationprofile.pcf-http-profile.id
-	se_group_ref		= data.avi_serviceenginegroup.default.id
-	pool_ref = avi_pool.pcf-http-pool.id
-	services {
-		port = 80
-	}
-	enabled			= true
-}
+
+#resource "avi_virtualservice" "pcf-vs-http" {
+#	name			= "tf-vs-${var.vs_http_name}"
+#	tenant_ref		= data.avi_tenant.admin.id
+#	cloud_ref		= data.avi_cloud.vmware.id
+#	vsvip_ref		= avi_vsvip.pcf-vip.id
+#	application_profile_ref	= avi_applicationprofile.pcf-http-profile.id
+#	se_group_ref		= data.avi_serviceenginegroup.default.id
+#	pool_ref = avi_pool.pcf-http-pool.id
+#	analytics_policy {
+#		all_headers = true
+#	}
+#	services {
+#		port = 80
+#	}
+#	enabled			= true
+#}
 
 resource "avi_virtualservice" "pcf-vs-https" {
 	name			= "tf-vs-${var.vs_https_name}"
@@ -231,9 +238,7 @@ resource "avi_virtualservice" "pcf-vs-https" {
 	application_profile_ref	= avi_applicationprofile.pcf-http-profile.id
 	se_group_ref		= data.avi_serviceenginegroup.default.id
 	pool_ref = avi_pool.pcf-http-pool.id
-	ssl_key_and_certificate_refs = [
-
-	]
+	ssl_key_and_certificate_refs = data.avi_sslkeyandcertificate.default.id
 	ssl_profile_ref = data.avi_sslprofile.default.id
 	analytics_policy {
 		all_headers = true
@@ -241,6 +246,9 @@ resource "avi_virtualservice" "pcf-vs-https" {
 	services {
 		port = 443
 		enable_ssl = true
+	}
+	services {
+		port = 80
 	}
 	enabled			= true
 }
