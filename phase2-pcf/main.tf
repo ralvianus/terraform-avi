@@ -46,7 +46,7 @@ data "avi_vrfcontext" "vmware" {
 	cloud_ref = data.avi_cloud.vmware.id
 }
 
-data "avi_ssl_profile" "default" {
+data "avi_sslprofile" "default" {
     name = "System Standard"
     tenant_ref = data.avi_tenant.admin.id
 }
@@ -237,7 +237,7 @@ resource "avi_virtualservice" "pcf-vs-https" {
 	ssl_key_and_certificate_refs = [
 
 	]
-	ssl_profile_ref = avi_ssl_profile.default.id
+	ssl_profile_ref = avi_sslprofile.default.id
 	analytics_policy {
 		all_headers = true
 	}
