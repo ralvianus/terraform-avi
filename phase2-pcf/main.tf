@@ -46,14 +46,19 @@ data "avi_vrfcontext" "vmware" {
 	cloud_ref = data.avi_cloud.vmware.id
 }
 
+data "avi_ssl_profile" "default" {
+    name = "System Standard"
+    tenant_ref = data.avi_tenant.admin.id
+}
+
 ## create NSX-T group for go-router
 resource "nsxt_policy_group" "gorouter-group" {
-  display_name = "gorouter"
+  display_name = "tf-group-pcf-gorouter"
   description  = "Terraform provisioned Go-Router Group"
 }
 
 resource "nsxt_policy_group" "pcf-control-group" {
-  display_name = "pcf-control"
+  display_name = "tf-group-pcf-control"
   description  = "Terraform provisioned pcf-control Group"
 }
 
@@ -181,18 +186,64 @@ resource "avi_vsvip" "pcf-vip" {
 	}
 }
 
+resource "avi_sslkeyandcertificate" "pcf-ca-certificate" {
+    name = "tf-pcf-vmca-certificate"
+    tenant_ref = data.avi_tenant.admin.id
+		type = "SSL_CERTIFICATE_TYPE_CA"
+		certificate = "var.ca_certs"
+		certificate_base64 = true
+		key = "var.ca_key"
+		key_base64 = true
+}
+
+resource "avi_sslkeyandcertificate" "pcf-certificate" {
+    name = "tf-pcf-certificate"
+    tenant_ref = data.avi_tenant.admin.id
+		type = "SSL_CERTIFICATE_TYPE_VIRTUALSERVICE"
+		certificate = "var.pcf_certs"
+		certificate_base64 = true
+		key = "var.pcf_key"
+		key_base64 = true
+		ca_certs = {
+      "ca_ref": "https://avic.corp.vmw/api/sslkeyandcertificate/sslkeyandcertificate-e05a3664-5a33-46ef-901e-278caeffddbd",
+      "name": "controlcenter.corp.vmw"
+    }
+}
 
 ## create the dns virtual service and attach vip
 ## create static DNS entries for Openshift cluster
 resource "avi_virtualservice" "pcf-vs-http" {
-	name			= "tf-vs-${var.vs_name}"
+	name			= "tf-vs-${var.vs_http_name}"
 	tenant_ref		= data.avi_tenant.admin.id
 	cloud_ref		= data.avi_cloud.vmware.id
 	vsvip_ref		= avi_vsvip.pcf-vip.id
 	application_profile_ref	= avi_applicationprofile.pcf-http-profile.id
 	se_group_ref		= data.avi_serviceenginegroup.default.id
+	pool_ref = avi_pool.pcf-http-pool.id
 	services {
 		port = 80
+	}
+	enabled			= true
+}
+
+resource "avi_virtualservice" "pcf-vs-https" {
+	name			= "tf-vs-${var.vs_https_name}"
+	tenant_ref		= data.avi_tenant.admin.id
+	cloud_ref		= data.avi_cloud.vmware.id
+	vsvip_ref		= avi_vsvip.pcf-vip.id
+	application_profile_ref	= avi_applicationprofile.pcf-http-profile.id
+	se_group_ref		= data.avi_serviceenginegroup.default.id
+	pool_ref = avi_pool.pcf-http-pool.id
+	ssl_key_and_certificate_refs = [
+
+	]
+	ssl_profile_ref = avi_ssl_profile.default.id
+	analytics_policy {
+		all_headers = true
+	}
+	services {
+		port = 443
+		enable_ssl = true
 	}
 	enabled			= true
 }
