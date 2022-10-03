@@ -184,7 +184,7 @@ resource "avi_sslkeyandcertificate" "pcf-ca-certificate" {
     name = "tf-pcf-vmca-certificate"
     tenant_ref = data.avi_tenant.admin.id
 		type = "SSL_CERTIFICATE_TYPE_CA"
-		certificate = {
+		certificate {
 				certificate = "${var.ca_certs}"
 		}
 		certificate_base64 = true
@@ -196,7 +196,7 @@ resource "avi_sslkeyandcertificate" "pcf-certificate" {
     name = "tf-pcf-certificate"
     tenant_ref = data.avi_tenant.admin.id
 		type = "SSL_CERTIFICATE_TYPE_VIRTUALSERVICE"
-		certificate = {
+		certificate {
 				certificate = "${var.pcf_certs}"
 		}
 		certificate_base64 = true
