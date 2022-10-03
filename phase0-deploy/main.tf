@@ -4,9 +4,9 @@ terraform {
 	}
 }
 provider "vsphere" {
-	vsphere_server		= "vcenter.lab01.one"
+	vsphere_server		= "vcsa-01a.corp.vmw"
 	user			= "administrator@vsphere.local"
-	password		= "VMware1!SDDC"
+	password		= "VMware1!"
 	allow_unverified_ssl	= true
 }
 
