@@ -238,7 +238,7 @@ resource "avi_virtualservice" "pcf-vs-https" {
 	application_profile_ref	= avi_applicationprofile.pcf-http-profile.id
 	se_group_ref		= data.avi_serviceenginegroup.default.id
 	pool_ref = avi_pool.pcf-http-pool.id
-	ssl_key_and_certificate_refs = data.avi_sslkeyandcertificate.default.id
+	ssl_key_and_certificate_refs = [data.avi_sslkeyandcertificate.default.id]
 	ssl_profile_ref = data.avi_sslprofile.default.id
 	analytics_policy {
 		all_headers = true
