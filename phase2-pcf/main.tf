@@ -203,7 +203,7 @@ resource "avi_sslkeyandcertificate" "pcf-certificate" {
 		key = "${var.pcf_key}"
 		key_base64 = true
 		ca_certs {
-      "ca_ref": avi_sslkeyandcertificate.pcf-ca-certificate.id
+      ca_ref = avi_sslkeyandcertificate.pcf-ca-certificate.id
     }
 }
 
