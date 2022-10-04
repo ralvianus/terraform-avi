@@ -41,3 +41,4 @@ terraform.rc
 .DS_Store
 .gitignore
 .gitattributes
+.DS_Store
