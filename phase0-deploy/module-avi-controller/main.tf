@@ -68,7 +68,7 @@ resource "vsphere_virtual_machine" "vm" {
 resource "null_resource" "healthcheck" {
 	triggers = {
 		avi_addresses	= vsphere_virtual_machine.vm.guest_ip_addresses[0]
-		avi-endpoint	= "avic.lab01.one"
+		avi-endpoint	= "avic.corp.vmw"
 	}
 	provisioner "local-exec" {
 		interpreter	= ["/bin/bash", "-c"]
@@ -81,7 +81,7 @@ resource "null_resource" "healthcheck" {
 
 resource "null_resource" "updateuser" {
 	triggers = {
-		avi-endpoint	= "avic.lab01.one"
+		avi-endpoint	= "avic.corp.vmw"
 		avi-username	= "admin"
 		avi-oldpass	= "58NFaGDJm(PJH0G"
 		avi-newpass	= var.admin-password
@@ -103,7 +103,7 @@ resource "null_resource" "updateuser" {
 
 resource "null_resource" "updatedns" {
 	triggers = {
-		avi-endpoint	= "avic.lab01.one"
+		avi-endpoint	= "avic.corp.vmw"
 		avi-username	= "admin"
 		avi-pass	= var.admin-password
 		avi-dns-server = var.dns-server
