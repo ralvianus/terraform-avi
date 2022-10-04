@@ -17,6 +17,7 @@ module "avi-controller" {
 	datacenter	= "RegionA01"
 	cluster		= "RegionA01-Compute"
 	datastore	= "vol1"
+	host		= "esx-04a.corp.vmw"
 	network		= "Management"
 
 	### appliance variables
