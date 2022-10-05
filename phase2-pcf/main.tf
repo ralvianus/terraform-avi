@@ -55,6 +55,10 @@ data "avi_sslkeyandcertificate" "default" {
     name = "System-Default-Cert"
 }
 
+data "avi_applicationprofile" "system-l4" {
+		name = "System-L4-Application"
+}
+
 ## create NSX-T group for go-router
 resource "nsxt_policy_group" "gorouter-group" {
   display_name = "tf-group-pcf-gorouter"
@@ -213,6 +217,23 @@ resource "avi_virtualservice" "pcf-vs-https" {
 	}
 	services {
 		port = 80
+	}
+	enabled			= true
+}
+
+resource "avi_virtualservice" "pcf-vs-ssh" {
+	name			= "tf-vs-${var.vs_ssh_name}"
+	tenant_ref		= data.avi_tenant.admin.id
+	cloud_ref		= data.avi_cloud.vmware.id
+	vsvip_ref		= avi_vsvip.pcf-vip.id
+	application_profile_ref	= data.avi_applicationprofile.system-l4.id
+	se_group_ref		= data.avi_serviceenginegroup.default.id
+	pool_ref = avi_pool.pcf-ssh-pool.id
+	analytics_policy {
+		all_headers = true
+	}
+	services {
+		port = 2222
 	}
 	enabled			= true
 }

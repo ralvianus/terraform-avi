@@ -37,6 +37,7 @@ nsxt_cloud_password = ""
 # pcf Virtual Service
 vs_name = "pcf"
 vs_https_name = "pcf-https"
+vs_ssh_name = "pcf-ssh"
 vs_address	= "10.20.10.110"
 ```
 ---

@@ -20,4 +20,5 @@ variable "nsxt_cloud_password" {
 # pcf Virtual Service
 variable "vs_name"	{}
 variable "vs_https_name"	{}
+variable "vs_ssh_name"	{}
 variable "vs_address"	{}
