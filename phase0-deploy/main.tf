@@ -22,7 +22,7 @@ module "avi-controller" {
 
 	### appliance variables
 	vm_name		= "avic.lab01.one"
-	remote_ovf_url	= "http://172.16.10.1:9000/iso/controller-21.1.4-9210.ova"
+	remote_ovf_url	= "http://172.16.10.1:9000/iso/controller-22.1.3-9096.ova"
 	mgmt-ip		= "172.16.10.119"
 	mgmt-mask	= "255.255.255.0"
 	default-gw	= "172.16.10.1"

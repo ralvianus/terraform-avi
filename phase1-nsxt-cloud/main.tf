@@ -7,14 +7,14 @@ terraform {
   required_providers {
     avi = {
       source = "vmware/avi"
-      version = "21.1.3"
+      version = "22.1.3"
     }
     vsphere = {
       source = "hashicorp/vsphere"
     }
     nsxt = {
       source = "vmware/nsxt"
-      version = "3.2.5"
+      version = "3.3.0"
     }
     time = {
       source = "hashicorp/time"
