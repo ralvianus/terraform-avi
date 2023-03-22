@@ -184,6 +184,7 @@ resource "avi_cloud" "nsxt_cloud" {
   tenant_ref = var.tenant
   vtype = "CLOUD_NSXT"
   dhcp_enabled = true
+  metrics_polling_interval = 5
   obj_name_prefix = var.nsxt_cloud_prefix
   dns_provider_ref = avi_ipamdnsproviderprofile.tf-dns-vmw.id
   ipam_provider_ref = avi_ipamdnsproviderprofile.tf-ipam-vmw.id
