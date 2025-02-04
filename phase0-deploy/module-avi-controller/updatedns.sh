@@ -3,9 +3,9 @@
 ## env variables
 #AVIUSER="admin"
 #PASS="VMware1!SDDC"
-#ENDPOINT="avic.lab01.one"
-#DNSSERVER="172.16.10.1"
-#DOMAIN="lab01.one"
+#ENDPOINT="avic.sgvbc.vcf"
+#DNSSERVER="192.168.110.10"
+#DOMAIN="sgvbc.vcf"
 
 ## login
 LOGINHEADERS=$(curl -kvs -X POST \
@@ -42,7 +42,7 @@ if [[ -n "$CSRFTOKEN" && -n "$SESSIONID" ]]; then
     "ntp_servers": [
         {
           "server": {
-            "addr": "172.16.10.1",
+            "addr": "192.168.110.10",
             "type": "V4"
           }
         }
